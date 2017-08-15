@@ -10,6 +10,12 @@ export class TodoDisplayComponent {
   @Input()
   itemsToDisplay:string[] = [];
 
-  // Needs to output an event from this component when a LI element is clicked
+  @Output()
+  onTodoRemoved: EventEmitter<string> = new EventEmitter();
 
+  constructor() { }
+
+  removeTodo(removeTodo: string) {
+    this.onTodoRemoved.emit(removeTodo);
+  }
 }

@@ -15,7 +15,26 @@ describe('RepositoryService', () => {
 
 
   it('removeTodo() correctly removes the right element', inject([RepositoryService], (service: RepositoryService) => {
-    // Implement tests to verify the desired removeTodo() behavior 
+    //Add "foo" and "bar" to TODO
+    service.saveTodo("foo");
+    service.saveTodo("bar");
+    let results: string[] = service.getTodos();
+    expect(results).toEqual(["foo", "bar"]);
+    
+    //Remove UNKNOWN item from TODO
+    service.removeTodo("UNKNOWN");
+    results = service.getTodos();
+    expect(results).toEqual(["foo","bar"]);
+
+    //Remove "foo" from TODO
+    service.removeTodo("foo");
+    results = service.getTodos();
+    expect(results).toEqual(["bar"]);
+
+    //Remove "bar" from TODO
+    service.removeTodo("bar");
+    results = service.getTodos();
+    expect(results).toEqual([]); 
   }));
 
 

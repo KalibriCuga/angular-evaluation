@@ -31,7 +31,20 @@ describe('AppComponent', () => {
   }));
 
   it('handling an item for removal should remove the item and then fetch the updated list of todo elements', async(() => {
-    // Implement here
+    let removeSpy = spyOn(TestBed.get(RepositoryService), 'removeTodo');
+    let fetchSpy = spyOn(TestBed.get(RepositoryService), 'getTodos').and.returnValue(["eat food"]);
+    
+    // Run the method we are testing
+    component.handleRemoveTodo("go to cleaners");
+
+    // Verify we removed the correct value via the repository service
+    expect(removeSpy).toHaveBeenCalledWith("go to cleaners");
+    
+    // Verify we fetched the data from the repository service
+    expect(fetchSpy).toHaveBeenCalled();
+
+    // Verify the list of 'savedTodos' was set the output of the 'getTodos()' method
+    expect(component.savedTodos).toEqual(["eat food"]);
   }));
 
   it('handling a new todo should save and then fetch the updated list of todo elements', async(() => {
