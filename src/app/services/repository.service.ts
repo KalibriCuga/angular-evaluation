@@ -14,7 +14,12 @@ export class RepositoryService {
   }
 
   removeTodo(todoToRemove: string) {
-    // Implement and write test to verify that the todoItems array is correctly updated when this method is invoked
+    if(todoToRemove){
+      let index = this.todoItems.indexOf(todoToRemove);
+      if(index > -1){
+        this.todoItems.splice(index, 1);
+      }
+    } 
   }
 
   getTodos():string[] {

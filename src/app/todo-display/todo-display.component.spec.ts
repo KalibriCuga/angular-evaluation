@@ -25,7 +25,11 @@ describe('TodoDisplayComponent', () => {
   });
 
   it('should emit the value given to it when the remove operation is invoked', () => {
-    // Implement here
+    spyOn(component.onTodoRemoved, "emit");
+    component.removeTodo("foo");
+    expect(component.onTodoRemoved.emit).toHaveBeenCalledWith("foo");
+    component.removeTodo("bar");
+    expect(component.onTodoRemoved.emit).toHaveBeenCalledWith("bar");
   });
 
 });
